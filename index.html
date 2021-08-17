@@ -13,6 +13,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Title</title>
   </head>
@@ -26,6 +27,7 @@
         <div id="pico-day">
           <!-- <p class="subtitle"><strong>NASA</strong> Image of the day!</p> -->
           <h2>NASA Image of The Day</h2>
+         
           <div id="gallery">
             <img id="pod-img" alt="Picture of the day" />
           </div>
@@ -37,20 +39,49 @@
           </div>
           <div class="content"></div>
 
-          <fieldset class="findImage">
-            <legend><h3>Find images on other dates</h3></legend>
-            <div>
-              <label for="start">From date:</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                placeholder="select a date"
-              />
-            </div>
+          <div class="search-container">
+             
+            <fieldset class="findImage">
+              <legend><h3>Find more images</h3></legend>
+              <div class="day-search">
+                <h3>Search image on specific Day</h3>
+                <label for="start">Date:</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  placeholder="select a date"
+                />
+                <input type="button" class= "button" id="search-image" value="Search" />
+              </div>
+              <div class="period-search">
+                <h3>Search images during specific Period</h3>
+                <label for="from-date">From Date:</label>
+                <input
+                  type="date"
+                  id="from-date"
+                  name="from-date"
+                  placeholder="select a from date"
+                />
 
-            <input type="button" id="search-image" value="Search images" />
-          </fieldset>
+                <label for="">To Date:</label>
+                <input
+                  type="date"
+                  id="to-date"
+                  name="to-date"
+                  placeholder="select a to date"
+                />
+              </div>
+              <br/>
+              <input type="button" class= "button" id="searchImg-byRange" value="Search" />
+            </fieldset> 
+          </div>  
+
+          <div class="media" id="range">
+
+          </div>
+        </div>
+       </div>
         </div>
 
         <div id="neo-data">

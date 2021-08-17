@@ -24,8 +24,8 @@ function displayPicture(data) {
   mediaContent.textContent = data.title;
 
   let pictureDate = document.querySelector(".date-taken");
-  pictureDate.textContent = data.date;
-
+  pictureDate.textContent = "Date of Picture: " + data.date;
+ 
   let podContent = document.querySelector(".content");
   podContent.textContent = data.explanation;
 }
@@ -51,9 +51,20 @@ function searchImagebyDate() {
     });
 }
 
+function searchImageByRange() {
+  var fromDateEl = (document.getElementById("from-date")).value;
+  var toDateEl = (document.getElementById("to-date")).value;
+
+
+
+}
+
 window.addEventListener("DOMContentLoaded", (event) => {
   var searchImageBtn = document.getElementById("search-image");
   searchImageBtn.addEventListener("click", searchImagebyDate);
 
+  var searchImgByDateBtn = document.getElementById("searchImg-byRange");
+  searchImgByDateBtn.addEventListener("click", searchImageByRange);
+  
   init();
 });
