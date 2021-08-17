@@ -11,13 +11,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="assets/css/style.css" />
-    
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <header>
-      <title>Welcome to Astronomy World</title>
-      <h1>Astronomy World</h1>
+      <div class="brand">Astronomy World</div>
     </header>
     <div class="container">
       <!-- <h1 class="title">Welcome to Astronomy World</h1> -->
@@ -25,7 +23,11 @@
         <div id="pico-day">
           <h2>NASA Image of The Day</h2>
           <div id="gallery">
-            <img id="pod-img" alt="Picture of the day" />
+            <img id="pod-img" alt="Picture of the day" /><a
+              id="img-link"
+              target="_blank"
+              ><i class="fas fa-external-link-alt"></i
+            ></a>
           </div>
           <div class="media">
             <div class="media-content">
@@ -80,7 +82,7 @@
               value="Search"
             />
           </fieldset>
-          <div class="media" id="range"></div>
+          <div id="searchResult"></div>
         </div>
       </div>
 
@@ -98,8 +100,7 @@
         </table>
       </div>
     </div>
-    
+
     <script src="./assets/JS/script.js"></script>
-    <script src="./assets/JS/script_apod.js"></script>
   </body>
 </html>
