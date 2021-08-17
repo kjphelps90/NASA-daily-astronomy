@@ -5,29 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="Description" content="Enter your description here" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    
+
     <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Title</title>
+    
   </head>
   <body>
     <header>
+      <title>Welcome to Astronomy World</title>
       <h1>Astronomy World</h1>
     </header>
     <div class="container">
-      <h1 class="title">Welcome to Astronomy World</h1>
+      <!-- <h1 class="title">Welcome to Astronomy World</h1> -->
       <div class="main-content">
         <div id="pico-day">
-          <!-- <p class="subtitle"><strong>NASA</strong> Image of the day!</p> -->
           <h2>NASA Image of The Day</h2>
-         
           <div id="gallery">
             <img id="pod-img" alt="Picture of the day" />
           </div>
@@ -38,52 +34,56 @@
             </div>
           </div>
           <div class="content"></div>
-
-          <div class="search-container">
-             
-            <fieldset class="findImage">
-              <legend><h3>Find more images</h3></legend>
-              <div class="day-search">
-                <h3>Search image on specific Day</h3>
-                <label for="start">Date:</label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  placeholder="select a date"
-                />
-                <input type="button" class= "button" id="search-image" value="Search" />
-              </div>
-              <div class="period-search">
-                <h3>Search images during specific Period</h3>
-                <label for="from-date">From Date:</label>
-                <input
-                  type="date"
-                  id="from-date"
-                  name="from-date"
-                  placeholder="select a from date"
-                />
-
-                <label for="">To Date:</label>
-                <input
-                  type="date"
-                  id="to-date"
-                  name="to-date"
-                  placeholder="select a to date"
-                />
-              </div>
-              <br/>
-              <input type="button" class= "button" id="searchImg-byRange" value="Search" />
-            </fieldset> 
-          </div>  
-
-          <div class="media" id="range">
-
-          </div>
         </div>
-       </div>
+        <div class="search-container">
+          <fieldset class="findImage">
+            <legend><h3>Find more images</h3></legend>
+            <div class="day-search">
+              <h3>Search image on specific Day</h3>
+              <label for="start">Date:</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                placeholder="select a date"
+              />
+              <input
+                type="button"
+                class="button"
+                id="search-image"
+                value="Search"
+              />
+            </div>
+            <div class="period-search">
+              <h3>Search images during specific Period</h3>
+              <label for="from-date">From Date:</label>
+              <input
+                type="date"
+                id="from-date"
+                name="from-date"
+                placeholder="select a from date"
+              />
+
+              <label for="">To Date:</label>
+              <input
+                type="date"
+                id="to-date"
+                name="to-date"
+                placeholder="select a to date"
+              />
+            </div>
+            <br />
+            <input
+              type="button"
+              class="button"
+              id="searchImg-byRange"
+              value="Search"
+            />
+          </fieldset>
+          <div class="media" id="range"></div>
         </div>
       </div>
+
       <div id="neo-data">
         <h2>Neo Data</h2>
         <table id="object-table">
@@ -98,7 +98,8 @@
         </table>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    
     <script src="./assets/JS/script.js"></script>
+    <script src="./assets/JS/script_apod.js"></script>
   </body>
 </html>
