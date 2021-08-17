@@ -23,6 +23,9 @@ function displayPicture(data) {
   let mediaContent = document.querySelector(".media-content .title");
   mediaContent.textContent = data.title;
 
+  let pictureDate = document.querySelector(".date-taken");
+  pictureDate.textContent = data.date;
+
   let podContent = document.querySelector(".content");
   podContent.textContent = data.explanation;
 }
