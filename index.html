@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Enter your description here" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Title</title>
+  </head>
+  <body>
+    <header>
+      <h1>Astronomy World</h1>
+    </header>
+    <div class="container">
+      <h1 class="title">Welcome to Astronomy World</h1>
+      <div class="main-content">
+        <div id="pico-day">
+          <!-- <p class="subtitle"><strong>NASA</strong> Image of the day!</p> -->
+          <h2>NASA Image of The Day</h2>
+          <div id="gallery">
+            <img id="pod-img" alt="Picture of the day" />
+          </div>
+          <div class="media">
+            <div class="media-content">
+              <p class="title"></p>
+            </div>
+          </div>
+          <div class="content"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-</body>
+          <fieldset class="findImage">
+            <legend><h3>Find images on other dates</h3></legend>
+            <div>
+              <label for="start">From date:</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                placeholder="select a date"
+              />
+            </div>
+
+            <input type="button" id="search-image" value="Search images" />
+          </fieldset>
+        </div>
+
+        <div id="neo-data">
+          <h2>Neo Data</h2>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/JS/script.js"></script>
+  </body>
 </html>

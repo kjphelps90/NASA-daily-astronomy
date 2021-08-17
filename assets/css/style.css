@@ -1,4 +1,126 @@
+:root {
+  --purple: #6f42c1;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --teal: #20c997;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --primary: #0d6efd;
+  --secondary: #6c757d;
+  --success: #198754;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --body-font-family: var(--font-sans-serif);
+  --body-font-size: 1rem;
+  --body-font-weight: 400;
+  --body-line-height: 1.5;
+  --body-color: #212529;
+  --body-bg: #fff;
+}
+
+html,
 body {
-    background-color: beige;
-    
+  height: 100%;
+  font-size: 62.5%;
+}
+/**
+* font size universal
+* 1 rem = 10px
+* 0.1 rem = 1px
+*/
+
+body {
+  background-color: var(--body-color);
+  color: var(--light);
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
+  text-align: var(--body-text-align);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+header {
+  background: var(--gray-dark);
+}
+
+.container {
+  margin: 0 auto;
+  padding-left: 10px;
+  width: 1140px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-content .card {
+  display: flex;
+  flex-direction: row;
+  background: transparent;
+  color: #fff;
+  width: 1140px !important;
+}
+
+#neo-data {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+    border: 1px solid var(--light);
+}
+
+#gallery {
+  height: 300px;
+  width: 100%;
+  position: relative;
+}
+
+#gallery img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#pico-day {
+  width: 50%;
+}
+
+.media-content .title {
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.container .content {
+  text-align: justify;
+  font-size: 1.4rem;
+}
+
+.findImage {
+  display: block;
+  padding: 10px;
+  margin: 20px;
+}
+
+.find-image button {
+  background-color: var(--gray-dark);
+  color: #fff;
+  width: 100px;
+  padding: 8px;
 }
