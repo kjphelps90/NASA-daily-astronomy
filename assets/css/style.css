@@ -67,21 +67,6 @@ header {
   flex-direction: row;
 }
 
-.main-content .card {
-  display: flex;
-  flex-direction: row;
-  background: transparent;
-  color: #fff;
-  width: 1140px !important;
-}
-
-#neo-data {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    width: 50%;
-    border: 1px solid var(--light);
-}
-
 #gallery {
   height: 300px;
   width: 100%;
@@ -100,12 +85,19 @@ header {
 
 #pico-day {
   width: 50%;
+  border: 1px solid var(--light);
 }
 
 .media-content .title {
   font-weight: 800;
   font-size: 2rem;
 }
+
+.media-content .date-taken {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
 
 .container .content {
   text-align: justify;
@@ -116,6 +108,7 @@ header {
   display: block;
   padding: 10px;
   margin: 20px;
+  font-size: 15px;
 }
 
 .find-image button {
@@ -123,4 +116,13 @@ header {
   color: #fff;
   width: 100px;
   padding: 8px;
+  font-size: 2rem;
+}
+
+#neo-data {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid var(--light);
+  font-size: 1.4rem;
 }
