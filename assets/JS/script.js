@@ -1,16 +1,17 @@
 const APIKey = "B55ZQWUIfhkzWvNarvOrlfh8ivj5W4hV3zZB7I47";
 
+var searchButtonClicked = 0; //This is going to be used for getting the new date when the search button is clicked.
+var CURRENTDAY = moment().format("YYYY-MM-DD");
+var nearEarthObjectsCall =
+  "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
+  APIKey +
+  "&start_date=" +
+  CURRENTDAY +
+  "&end_date=" +
+  CURRENTDAY;
+console.log(nearEarthObjectsCall);
+
 function init() {
-  var CURRENTDAY = moment().format("YYYY-MM-DD");
-  var searchButtonClicked = 0; //This is going to be used for getting the new date when the search button is clicked.
-  var nearEarthObjectsCall =
-    "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
-    APIKey +
-    "&start_date=" +
-    CURRENTDAY +
-    "&end_date=" +
-    CURRENTDAY;
-  console.log(nearEarthObjectsCall);
   const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}`;
 
   fetch(url)
@@ -30,40 +31,83 @@ function displayPicture(data) {
   let podElm = document.getElementById("pod-img");
   podElm.setAttribute("src", data.url);
 
+  let imgLink = document.getElementById("img-link");
+  imgLink.setAttribute("href", data.url);
+
   let mediaContent = document.querySelector(".media-content .title");
   mediaContent.textContent = data.title;
 
   let pictureDate = document.querySelector(".date-taken");
-  pictureDate.textContent = "Date of Picture: " + data.date;
+  pictureDate.textContent =
+    "Date of Picture: " + moment(data.date).format("MM/DD/YYYY");
 
   let podContent = document.querySelector(".content");
   podContent.textContent = data.explanation;
 }
 
-function searchImagebyDate() {
+function searchImagebyDate(searchDate) {
   let searchByDateEl = document.getElementById("date");
-  let searchDate = searchByDateEl.value;
+  let dateParam =
+    typeof searchDate === "string" ? searchDate : searchByDateEl.value;
+  let searchResult = document.getElementById("searchResult");
+  if (!searchByDateEl.value) {
+    searchResult.innerHTML = "<h2>Please select a specific date!</h2>";
+  } else {
+    searchResult.innerHTML = "";
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${dateParam}`;
+    console.log(url);
 
-  const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${searchDate}`;
-  console.log(url);
-
-  fetch(url)
-    .then((response) => {
-      console.log(url);
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      displayPicture(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    fetch(url)
+      .then((response) => {
+        console.log(url);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        displayPicture(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 function searchImageByRange() {
-  var fromDateEl = document.getElementById("from-date").value;
-  var toDateEl = document.getElementById("to-date").value;
+  let fromDateEl = document.getElementById("from-date").value;
+  let toDateEl = document.getElementById("to-date").value;
+  let searchResult = document.getElementById("searchResult");
+
+  if (!fromDateEl || !toDateEl) {
+    searchResult.innerHTML = "<h2>Please select a date!</h2>";
+  } else {
+    searchResult.innerHTML = "";
+
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&start_date=${fromDateEl}&end_date=${toDateEl}`;
+    console.log(url);
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        let searchData = data.map((d) => {
+          let elm = `<img src="${d.url}" class="image" alt="${
+            d.title
+          }">${moment(d.date).format("MMM Do, YYYY")} <strong>${
+            d.title
+          }</strong>`;
+          let card = `<div class="result-item" onclick="searchImagebyDate('${d.date}')">${elm}</div>`;
+          return card;
+        });
+
+        searchResult.innerHTML = searchData.join("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------
