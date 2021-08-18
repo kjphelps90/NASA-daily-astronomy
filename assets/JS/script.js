@@ -27,6 +27,8 @@ function init() {
     });
 }
 
+
+//Display NASA image of the day
 function displayPicture(data) {
   let podElm = document.getElementById("pod-img");
   podElm.setAttribute("src", data.url);
@@ -45,6 +47,7 @@ function displayPicture(data) {
   podContent.textContent = data.explanation;
 }
 
+//Search image for a specific date
 function searchImagebyDate(searchDate) {
   let searchByDateEl = document.getElementById("date");
   let dateParam =
@@ -72,6 +75,27 @@ function searchImagebyDate(searchDate) {
   }
 }
 
+//Display image data from Range
+function displayPictureItem(dateFromRow) {
+  let dateParam = dateFromRow;
+  const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${dateParam}`;
+  console.log(url);
+
+    fetch(url)
+      .then((response) => {
+        console.log(url);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        displayPicture(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+}
+
+//Function to search NASA images from a Range of images
 function searchImageByRange() {
   let fromDateEl = document.getElementById("from-date").value;
   let toDateEl = document.getElementById("to-date").value;
@@ -98,7 +122,7 @@ function searchImageByRange() {
           }">${moment(d.date).format("MMM Do, YYYY")} <strong>${
             d.title
           }</strong>`;
-          let card = `<div class="result-item" onclick="searchImagebyDate('${d.date}')">${elm}</div>`;
+          let card = `<div class="result-item" onclick="displayPictureItem('${d.date}')">${elm}</div>`;
           return card;
         });
 
