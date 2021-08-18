@@ -11,6 +11,12 @@ var nearEarthObjectsCall =
   CURRENTDAY;
 console.log(nearEarthObjectsCall);
 
+// variables for Vid/Img Library API
+var nivlSearchTerm = "";
+var nivlUrl = 'https://images-api.nasa.gov/search?q=' + nivlSearchTerm + "&media_type=image&page=1&year_start=2018&year_end=2021";
+console.log(nivlUrl);
+var searchLibraryForm = document.getElementById("vid-img-form");
+
 function init() {
   const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}`;
 
@@ -212,3 +218,52 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   init();
 });
+
+
+// VID IMAGE LIBRARY FUNCTIONS ---------------------------------------------------------
+function createRandomImg(data) {
+  console.log(data);
+  var arrayLength = data.collection.items.length;
+  console.log(arrayLength)
+  var randItem = Math.floor(Math.random() * arrayLength);
+  console.log(randItem);
+  var selectedImg = data.collection.items[randItem].links[0].href;
+  console.log(selectedImg);
+  var imgDescription = data.collection.items[randItem].data[0].description;
+  console.log(imgDescription);
+  var imgAltText = data.collection.items[randItem].data[0].title;
+  console.log(imgAltText);
+  var libraryImg = document.getElementById("library-image");
+  libraryImg.setAttribute("src", selectedImg);
+  libraryImg.setAttribute("alt", imgAltText);
+  var libraryDescription = document.getElementById("img-description");
+  libraryDescription.textContent = imgDescription;
+
+};
+
+function fetchImage(nivlUrl) {
+  //fetched url data
+  fetch(nivlUrl)
+      .then(function (response) {
+          console.log(response);
+          if (response.ok) {
+              return response.json();
+          }
+      })
+      .then(function (data) {
+          console.log(data);
+          createRandomImg(data);
+      })
+}
+
+searchLibraryForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var searchLibInput = document.getElementById("vid-img-search");
+  nivlSearchTerm = searchLibInput.value;
+  var searchCall = 'https://images-api.nasa.gov/search?q=' + nivlSearchTerm + "&media_type=image&page=1&year_start=2018&year_end=2021";
+  fetchImage(searchCall);
+
+})
+
+fetchImage(nivlUrl);
+
