@@ -262,7 +262,11 @@ function createRandomImg(data) {
   libraryImg.setAttribute("alt", imgAltText);
   var libraryDescription = document.getElementById("img-description");
   libraryDescription.textContent = imgDescription;
-
+  var dateTimeStamp = data.collection.items[randItem].data[0].date_created
+  var imgDateTaken = document.getElementById("img-date");
+  imgDateTaken.textContent = "Date of Picture: " + moment(dateTimeStamp).format("MM/DD/YYYY");
+  var imgTitle = document.getElementById("img-title");
+  imgTitle.textContent = imgAltText;
 };
 
 function fetchImage(nivlUrl) {
