@@ -26,6 +26,7 @@
       <title class="title">Astronomy World</title>
     </header>
     <div class="container">
+      <!--NASA image of the day-->
       <div class="main-content">
         <div id="pico-day">
           <div class="section-title"><h2>NASA Image of The Day</h2></div>
@@ -45,62 +46,71 @@
           <div class="content"></div>
         </div>
         <div class="search-container">
-          <fieldset class="findImage">
-            <legend>
-              <h3>Find more images</h3>
-            </legend>
-            <div class="day-search">
-              <h3>Search image on specific Day</h3>
-              <label for="start">Date:</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                placeholder="select a date"
-              />
-              <input
-                type="button"
-                class="button"
-                id="search-image"
-                value="Search"
-              />
-            </div>
-            <div class="period-search">
-              <h3>Search images during specific Period</h3>
-              <label for="from-date">From Date:</label>
-              <input
-                type="date"
-                id="from-date"
-                name="from-date"
-                placeholder="select a from date"
-              />
+          <p>Find more images...</p>
 
-              <label for="">To Date:</label>
-              <input
-                type="date"
-                id="to-date"
-                name="to-date"
-                placeholder="select a to date"
-              />
-            </div>
-            <br />
-            <input
-              type="button"
-              class="button"
-              id="searchImg-byRange"
-              value="Search"
-            />
-          </fieldset>
+          <!--Search images on a specific day-->
+          <div class="day-search">
+            <fieldset>
+              <legend>
+                <h3>Search image on specific Day</h3>
+              </legend>
+              <div class="day">
+                  <label for="specific-date">Date:</label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="specific-date"
+                    placeholder="select a date"
+                  />
+                  <i class="fas fa-search btn-search" id="search-image"></i>
+                </div>
+            </fieldset>
+          </div>
+          <div></div>
+          <!--Search images for a given period-->            
+          <div class="period-search">
+            <fieldset>
+              <legend>
+                <h3>Search images during specific Period</h3>
+              </legend>
+              <div class="date">
+                <label for="from-date">From Date:</label>
+                <input
+                  type="date"
+                  id="from-date"
+                  name="from-date"
+                  placeholder="select a from date"
+                />
+              </div>
+              <br />
+              <div class="date">
+                <label for="">To Date:</label>
+                <input
+                  type="date"
+                  id="to-date"
+                  name="to-date"
+                  placeholder="select a to date"
+                />
+                <i class="fas fa-search button" id="searchImg-byRange"></i>
+              </div>
+            </fieldset>
+           
+            
+         
+          </div>
+
           <div id="searchResult"></div>
         </div>
       </div>
 
+      <!--NASA Image Library-->
       <div class="img-vid-library">
         <div class="section-title">
           <h2>NASA Image Library</h2>
           <form id="vid-img-form">
             <h3>Search Keywords</h3>
             <input id="vid-img-search" type="text" />
+            <!-- <i class="fas fa-search btn-search" type="submit" id="search-library"></i> -->
             <button type="submit">Search</button>
           </form>
         </div>
@@ -114,6 +124,8 @@
           <p class="img-desc" id="img-description"></p>
         </div>
       </div>
+
+      <!--Near Earth Object (NEO Data)-->
       <div id="neo-data">
         <h2 class="neo-head">Daily Near Earth Objects</h2>
         <div class="neo-date-input">
@@ -135,8 +147,6 @@
         </table>
       </div>
     </div>
-
-    
 
     <script src="./assets/JS/script.js"></script>
   </body>
