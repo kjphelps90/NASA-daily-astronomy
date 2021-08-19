@@ -17,10 +17,11 @@
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #212529;
+  --astro-font: "Trispace", sans-serif;
   --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --body-font-family: var(--font-sans-serif);
+  --body-font-family: var(--astro-font);
   --body-font-size: 1rem;
   --body-font-weight: 400;
   --body-line-height: 1.5;
@@ -61,14 +62,19 @@ header {
 }
 
 header .brand {
-  font-size: 2.8rem;
-  font-weight: 500;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .container {
   margin: 0 auto;
   padding-left: 10px;
-  width: 80%
+  width: 80%;
 }
 
 .main-content {
@@ -82,7 +88,7 @@ header .brand {
   position: relative;
 }
 
-#gallery img {  
+#gallery img {
   max-height: 100%;
   max-width: 100%;
 }
@@ -105,7 +111,6 @@ header .brand {
   font-weight: 600;
   font-size: 1.5rem;
 }
-
 
 .container .content {
   text-align: justify;
@@ -150,7 +155,8 @@ header .brand {
   padding-bottom: 20px;
 }
 
-td a, td a:visited {
+td a,
+td a:visited {
   color: var(--primary);
 }
 
@@ -169,7 +175,6 @@ td {
   font-size: 1.6rem;
 }
 
-
 /**
 * APOD Search Result
 */
@@ -184,14 +189,28 @@ td {
   width: 50px;
   margin-right: 10px;
   vertical-align: middle;
-
 }
 
 #searchResult .result-item {
   margin: 3px 0;
   padding: 5px;
-  border: 1px solid var(--light);  
+  border: 1px solid var(--light);
   cursor: pointer;
   font-size: 15px;
 }
 
+.library-img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.description-container {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.description-container .img-desc {
+  text-align: justify;
+  font-size: 1.4rem;
+}

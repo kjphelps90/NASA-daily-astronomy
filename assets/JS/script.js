@@ -1,5 +1,6 @@
 const APIKey = "B55ZQWUIfhkzWvNarvOrlfh8ivj5W4hV3zZB7I47";
 
+//Variables for Near Earth Objects (NEO)
 var CURRENTDAY = moment().format("YYYY-MM-DD");
 var nearEarthObjectsCall =
   "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
@@ -12,29 +13,16 @@ console.log(nearEarthObjectsCall);
 var neoForm = document.getElementById("neo-form");
 var neoDate = document.getElementById("neo-input");
 
-// variables for Vid/Img Library API
+// variables for NASA Image Library API
 var nivlSearchTerm = "";
-var nivlUrl = 'https://images-api.nasa.gov/search?q=' + nivlSearchTerm + "&media_type=image&page=1&year_start=2018&year_end=2021";
+var nivlUrl =
+  "https://images-api.nasa.gov/search?q=" +
+  nivlSearchTerm +
+  "&media_type=image&page=1&year_start=2018&year_end=2021";
 console.log(nivlUrl);
 var searchLibraryForm = document.getElementById("vid-img-form");
 
-function init() {
-  const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}`;
-
-  fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      displayPicture(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-
+//--------Functions for NASA image of the Day---------
 //Display NASA image of the day
 function displayPicture(data) {
   let podElm = document.getElementById("pod-img");
@@ -88,18 +76,18 @@ function displayPictureItem(dateFromRow) {
   const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${dateParam}`;
   console.log(url);
 
-    fetch(url)
-      .then((response) => {
-        console.log(url);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        displayPicture(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  fetch(url)
+    .then((response) => {
+      console.log(url);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      displayPicture(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 //Function to search NASA images from a Range of images
@@ -141,7 +129,7 @@ function searchImageByRange() {
   }
 }
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------
+//--------Functions for NEO Data---------
 
 function createTable(nearEarthData, queryDate) {
   var date = queryDate.trim();
@@ -154,10 +142,9 @@ function createTable(nearEarthData, queryDate) {
 
   var tableData = document.querySelectorAll("tr");
   console.log(tableData.length);
-  
-  
+
   if (tableData.length > 1) {
-    for (i=0; i < tableData.length-1; i++) {
+    for (i = 0; i < tableData.length - 1; i++) {
       objectTable.deleteRow(1);
     }
   }
@@ -216,8 +203,6 @@ function createTable(nearEarthData, queryDate) {
 
 // creating function which creates the initial table to be loaded.
 function callNearEarthApi(nearEarthObjectsCall, date) {
-
-
   fetch(nearEarthObjectsCall)
     .then(function (response) {
       console.log(response);
@@ -233,40 +218,47 @@ function callNearEarthApi(nearEarthObjectsCall, date) {
       console.log(error);
     });
 }
-// initial call of the function to create the table.
-callNearEarthApi(nearEarthObjectsCall, CURRENTDAY);
 
-neoForm.addEventListener("submit", function(event){
+//NEO Event Listener
+neoForm.addEventListener("submit", function (event) {
   event.preventDefault();
   var newNeoInputDate = neoDate.value;
   console.log(newNeoInputDate);
-  var updatedCall = "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
-  APIKey +
-  "&start_date=" +
-  newNeoInputDate +
-  "&end_date=" +
-  newNeoInputDate;
+  var updatedCall =
+    "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
+    APIKey +
+    "&start_date=" +
+    newNeoInputDate +
+    "&end_date=" +
+    newNeoInputDate;
   callNearEarthApi(updatedCall, newNeoInputDate);
-})
-
-// -----------------------------------------------------------------------------------------------------------------
-
-window.addEventListener("DOMContentLoaded", (event) => {
-  var searchImageBtn = document.getElementById("search-image");
-  searchImageBtn.addEventListener("click", searchImagebyDate);
-
-  var searchImgByDateBtn = document.getElementById("searchImg-byRange");
-  searchImgByDateBtn.addEventListener("click", searchImageByRange);
-
-  init();
 });
 
+////--------Initialize Function---------
+function init() {
+  const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}`;
 
-// VID IMAGE LIBRARY FUNCTIONS ---------------------------------------------------------
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      displayPicture(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+// initial call of the function to create the table for NEO Data.
+callNearEarthApi(nearEarthObjectsCall, CURRENTDAY);
+
+//--------NASA Image Library Functions---------
 function createRandomImg(data) {
   console.log(data);
   var arrayLength = data.collection.items.length;
-  console.log(arrayLength)
+  console.log(arrayLength);
   var randItem = Math.floor(Math.random() * arrayLength);
   console.log(randItem);
   var selectedImg = data.collection.items[randItem].links[0].href;
@@ -280,36 +272,50 @@ function createRandomImg(data) {
   libraryImg.setAttribute("alt", imgAltText);
   var libraryDescription = document.getElementById("img-description");
   libraryDescription.textContent = imgDescription;
-  var dateTimeStamp = data.collection.items[randItem].data[0].date_created
+  var dateTimeStamp = data.collection.items[randItem].data[0].date_created;
   var imgDateTaken = document.getElementById("img-date");
-  imgDateTaken.textContent = "Date of Picture: " + moment(dateTimeStamp).format("MM/DD/YYYY");
+  imgDateTaken.textContent =
+    "Date of Picture: " + moment(dateTimeStamp).format("MM/DD/YYYY");
   var imgTitle = document.getElementById("img-title");
   imgTitle.textContent = imgAltText;
-};
+}
 
 function fetchImage(nivlUrl) {
   //fetched url data
   fetch(nivlUrl)
-      .then(function (response) {
-          console.log(response);
-          if (response.ok) {
-              return response.json();
-          }
-      })
-      .then(function (data) {
-          console.log(data);
-          createRandomImg(data);
-      })
+    .then(function (response) {
+      console.log(response);
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then(function (data) {
+      console.log(data);
+      createRandomImg(data);
+    });
 }
 
 searchLibraryForm.addEventListener("submit", function (event) {
   event.preventDefault();
   var searchLibInput = document.getElementById("vid-img-search");
   nivlSearchTerm = searchLibInput.value;
-  var searchCall = 'https://images-api.nasa.gov/search?q=' + nivlSearchTerm + "&media_type=image&page=1&year_start=2018&year_end=2021";
+  var searchCall =
+    "https://images-api.nasa.gov/search?q=" +
+    nivlSearchTerm +
+    "&media_type=image&page=1&year_start=2018&year_end=2021";
   fetchImage(searchCall);
-
-})
+});
 
 fetchImage(nivlUrl);
 
+//------------Window initiate function---------------
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  var searchImageBtn = document.getElementById("search-image");
+  searchImageBtn.addEventListener("click", searchImagebyDate);
+
+  var searchImgByDateBtn = document.getElementById("searchImg-byRange");
+  searchImgByDateBtn.addEventListener("click", searchImageByRange);
+
+  init();
+});
