@@ -1,6 +1,5 @@
 const APIKey = "B55ZQWUIfhkzWvNarvOrlfh8ivj5W4hV3zZB7I47";
 
-var searchButtonClicked = 0; //This is going to be used for getting the new date when the search button is clicked.
 var CURRENTDAY = moment().format("YYYY-MM-DD");
 var nearEarthObjectsCall =
   "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
@@ -10,6 +9,8 @@ var nearEarthObjectsCall =
   "&end_date=" +
   CURRENTDAY;
 console.log(nearEarthObjectsCall);
+var neoForm = document.getElementById("neo-form");
+var neoDate = document.getElementById("neo-input");
 
 // variables for Vid/Img Library API
 var nivlSearchTerm = "";
@@ -149,40 +150,48 @@ function createTable(nearEarthData, queryDate) {
   console.log(earthObjectsArray);
   var objectTable = document.getElementById("object-table");
 
+  // this is for selecting the rows to remove when a new search is made. Since the if statement is looking for length that is greater than 1, it won't run upon initializing.
+
+  var tableData = document.querySelectorAll("tr");
+  console.log(tableData.length);
+  
+  
+  if (tableData.length > 1) {
+    for (i=0; i < tableData.length-1; i++) {
+      objectTable.deleteRow(1);
+    }
+  }
+
   for (let i = 0; i < earthObjectsArray.length; i++) {
     // grabbing data from the output.
     var objectName = earthObjectsArray[i].name;
-    console.log(objectName);
     var objectSize =
       Math.round(
         earthObjectsArray[i].estimated_diameter.meters.estimated_diameter_max
       ) + " m";
-    console.log(objectSize);
     var objectVelocity =
       Math.round(
         earthObjectsArray[i].close_approach_data[0].relative_velocity
           .kilometers_per_hour
       ) + " km/h";
-    console.log(objectVelocity);
     var objectMissDistance =
       Math.round(
         earthObjectsArray[i].close_approach_data[0].miss_distance.kilometers
       ) + " km";
-    console.log(objectMissDistance);
     var objectMagnitude = earthObjectsArray[i].absolute_magnitude_h + " H";
-    console.log(objectMagnitude);
     var objectLink = earthObjectsArray[i].nasa_jpl_url;
-    console.log(objectLink);
-    // creating table data items
 
     // creating table rows and table data. I'm thinking that it would be best to have the table tag and header in the actual HTML.
     var createRow = document.createElement("tr");
 
     var tableDataDate = document.createElement("td");
     tableDataDate.textContent = date;
-    console.log(tableDataDate);
     var tableDataName = document.createElement("td");
-    tableDataName.textContent = objectName;
+    var tableDataNameLink = document.createElement("a");
+    tableDataName.append(tableDataNameLink);
+    tableDataNameLink.setAttribute("href", objectLink);
+    tableDataNameLink.setAttribute("target", "_blank");
+    tableDataNameLink.textContent = objectName;
     var tableDataSize = document.createElement("td");
     tableDataSize.textContent = objectSize;
     var tableDataVelocity = document.createElement("td");
@@ -206,14 +215,8 @@ function createTable(nearEarthData, queryDate) {
 }
 
 // creating function which creates the initial table to be loaded.
-function callNearEarthApi(nearEarthObjectsCall) {
-  if (searchButtonClicked === 0) {
-    date = CURRENTDAY;
-  }
-  console.log(date);
-  // else {
-  // }
-  // going to have to create an IF statement for the date variable. If we're on the initial load then the date will be the current date. If the search button has clicked then the date will be whatever date that brings through. It will have to be in the format YYYY-MM-DD.
+function callNearEarthApi(nearEarthObjectsCall, date) {
+
 
   fetch(nearEarthObjectsCall)
     .then(function (response) {
@@ -230,8 +233,23 @@ function callNearEarthApi(nearEarthObjectsCall) {
       console.log(error);
     });
 }
-// initial call of the function to create the table. This can be at the bottom of the JQuery code.
-callNearEarthApi(nearEarthObjectsCall);
+// initial call of the function to create the table.
+callNearEarthApi(nearEarthObjectsCall, CURRENTDAY);
+
+neoForm.addEventListener("submit", function(event){
+  event.preventDefault();
+  var newNeoInputDate = neoDate.value;
+  console.log(newNeoInputDate);
+  var updatedCall = "https://api.nasa.gov/neo/rest/v1/feed?api_key=" +
+  APIKey +
+  "&start_date=" +
+  newNeoInputDate +
+  "&end_date=" +
+  newNeoInputDate;
+  callNearEarthApi(updatedCall, newNeoInputDate);
+})
+
+// -----------------------------------------------------------------------------------------------------------------
 
 window.addEventListener("DOMContentLoaded", (event) => {
   var searchImageBtn = document.getElementById("search-image");

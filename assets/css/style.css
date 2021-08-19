@@ -128,11 +128,15 @@ header .brand {
 }
 
 #neo-data {
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin: 20px 0 30px 10px;
   width: 100%;
   border: 1px solid var(--light);
   font-size: 1.4rem;
+}
+
+#neo-form {
+  padding-left: 10%;
+  padding-bottom: 2%;
 }
 
 .neo-head {
@@ -144,6 +148,15 @@ header .brand {
   margin-left: 10%;
   text-align: center;
   padding-bottom: 20px;
+}
+
+td a, td a:visited {
+  color: var(--primary);
+}
+
+td a:hover {
+  color: var(--orange);
+  font-weight: bold;
 }
 
 th {
