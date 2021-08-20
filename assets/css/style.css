@@ -55,15 +55,28 @@ body {
 
 header {
   background: var(--gray-dark);
-  height: 50px;
+  height: 100px;
   align-items: center;
   text-align: center;
   margin-bottom: 10px;
+  background-image: url("./images/space_background.jpg");
 }
 
 header .brand {
   font-size: 3rem;
   font-weight: 800;
+}
+
+header a, header a:visited{
+  color: var(--light);
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+header a:hover {
+  font-size: 16px;
 }
 
 .section-title {
@@ -240,4 +253,20 @@ td {
 #vid-img-search {
   width: 250;
   height: 20px;
+}
+
+
+.footer {
+  width: 100%;
+  height: 75px;
+  background-color: rgba(108, 117, 125, .2);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 1.8rem;
+}
+
+.footer a {
+  color: var(--light);
 }
