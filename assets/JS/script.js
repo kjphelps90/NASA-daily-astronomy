@@ -128,15 +128,18 @@ function searchImageByRange() {
     fetch(url)
       .then(function (response) {
         if (response.status !== 200) {
-          searchResult.innerHTML = "NASA Image of the day response: " + response.status + ". Data unavailable!";
+          searchResult.innerHTML =
+            "NASA Image of the day response: " +
+            response.status +
+            ". Data unavailable!";
         }
         return response.json();
       })
       .then(function (data) {
         console.log(data.length);
 
-        for (let i=0; i < data.length; i++) {
-          let imgResultElm = document.createElement('img');
+        for (let i = 0; i < data.length; i++) {
+          let imgResultElm = document.createElement("img");
           imgResultElm.classList.add("image");
           imgResultElm.setAttribute("alt", data[i].title);
           imgResultElm.setAttribute("src", data[i].url);
@@ -146,8 +149,15 @@ function searchImageByRange() {
 
           let outerDiv = document.createElement("div");
           outerDiv.classList.add("result-item");
-          outerDiv.setAttribute("onclick", "displayPictureItem("+ data[i].date +")");
-          outerDiv.append(imgResultElm, moment(data[i].date).format("MMMM Do, YYYY"), strongElm);
+          outerDiv.setAttribute(
+            "onclick",
+            "displayPictureItem('" + data[i].date + "')"
+          );
+          outerDiv.append(
+            imgResultElm,
+            moment(data[i].date).format("MMMM Do, YYYY"),
+            strongElm
+          );
           searchResult.appendChild(outerDiv);
         }
 
@@ -162,7 +172,7 @@ function searchImageByRange() {
 
         //searchResult.innerHTML = searchData.join("");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
       });
   }
@@ -279,14 +289,14 @@ function init() {
   const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}`;
 
   fetch(url)
-    .then((response) => {
+    .then(function (response) {
       return response.json();
     })
-    .then((data) => {
+    .then(function (data) {
       console.log(data);
       displayPicture(data);
     })
-    .catch((err) => {
+    .catch(function (err) {
       console.log(err);
     });
 }
