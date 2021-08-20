@@ -85,6 +85,7 @@ header a:hover {
 
 .date {
   font-size: 1.5rem;
+  margin-top: 5px;
 }
 .container {
   margin: 0 auto;
@@ -150,6 +151,10 @@ header a:hover {
   text-align: center;
 }
 
+.search-container .period-search {
+  margin-top: 10px;
+}
+
 .findImage {
   display: block;
   padding: 10px;
@@ -187,6 +192,9 @@ header a:hover {
   font-size: 15px;
 }
 
+.result-item strong {
+  margin-left: 10px;
+}
 
 /*Near Earth Object(NEO) data styles*/
 #neo-data {

@@ -45,7 +45,7 @@ function displayPicture(data) {
 
 //Search image for a specific date
 function searchImagebyDate(searchDate) {
-  let searchByDateEl = document.getElementById("date");
+  let searchByDateEl = document.getElementById("specific-date");
   let dateParam =
     typeof searchDate === "string" ? searchDate : searchByDateEl.value;
   let searchResult = document.getElementById("searchResult");
@@ -53,19 +53,29 @@ function searchImagebyDate(searchDate) {
     searchResult.innerHTML = "<h2>Please select a specific date!</h2>";
   } else {
     searchResult.innerHTML = "";
-    const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${dateParam}`;
+    const url =
+      "https://api.nasa.gov/planetary/apod?api_key=" +
+      APIKey +
+      "&date=" +
+      dateParam;
     console.log(url);
 
     fetch(url)
-      .then((response) => {
+      .then(function (response) {
         console.log(url);
+        if (response.status !== 200) {
+          searchResult.innerHTML =
+            "NASA Image of the day response: " +
+            response.status +
+            ". Data unavailable!";
+        }
         return response.json();
       })
-      .then((data) => {
+      .then(function (data) {
         console.log(data);
         displayPicture(data);
       })
-      .catch((err) => {
+      .catch(function (err) {
         console.log(err);
       });
   }
@@ -74,15 +84,19 @@ function searchImagebyDate(searchDate) {
 //Display image data from Range
 function displayPictureItem(dateFromRow) {
   let dateParam = dateFromRow;
-  const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&date=${dateParam}`;
+  const url =
+    "https://api.nasa.gov/planetary/apod?api_key=" +
+    APIKey +
+    "&date=" +
+    dateParam;
   console.log(url);
 
   fetch(url)
-    .then((response) => {
+    .then(function (response) {
       console.log(url);
       return response.json();
     })
-    .then((data) => {
+    .then(function (data) {
       console.log(data);
       displayPicture(data);
     })
@@ -102,29 +116,53 @@ function searchImageByRange() {
   } else {
     searchResult.innerHTML = "";
 
-    const url = `https://api.nasa.gov/planetary/apod?api_key=${APIKey}&start_date=${fromDateEl}&end_date=${toDateEl}`;
+    const url =
+      "https://api.nasa.gov/planetary/apod?api_key=" +
+      APIKey +
+      "&start_date=" +
+      fromDateEl +
+      "&end_date=" +
+      toDateEl;
     console.log(url);
 
     fetch(url)
-      .then((response) => {
+      .then(function (response) {
+        if (response.status !== 200) {
+          searchResult.innerHTML = "NASA Image of the day response: " + response.status + ". Data unavailable!";
+        }
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then(function (data) {
+        console.log(data.length);
 
-        let searchData = data.map((d) => {
-          let elm = `<img src="${d.url}" class="image" alt="${
-            d.title
-          }">${moment(d.date).format("MMMM Do, YYYY")} <strong>${
-            d.title
-          }</strong>`;
-          let card = `<div class="result-item" onclick="displayPictureItem('${d.date}')">${elm}</div>`;
-          return card;
-        });
+        for (let i=0; i < data.length; i++) {
+          let imgResultElm = document.createElement('img');
+          imgResultElm.classList.add("image");
+          imgResultElm.setAttribute("alt", data[i].title);
+          imgResultElm.setAttribute("src", data[i].url);
 
-        searchResult.innerHTML = searchData.join("");
+          let strongElm = document.createElement("strong");
+          strongElm.textContent = data[i].title;
+
+          let outerDiv = document.createElement("div");
+          outerDiv.classList.add("result-item");
+          outerDiv.setAttribute("onclick", "displayPictureItem("+ data[i].date +")");
+          outerDiv.append(imgResultElm, moment(data[i].date).format("MMMM Do, YYYY"), strongElm);
+          searchResult.appendChild(outerDiv);
+        }
+
+        /* // let searchData = data.map((d) => { */
+        //   let elm = `<img src="${d.url}" class="image" alt="${
+        //     d.title}">${moment(d.date).format("MMMM Do, YYYY")} <strong>${
+        //     d.title
+        //   }</strong>`;
+        //   let card = `<div class="result-item" onclick="displayPictureItem('${d.date}')">${elm}</div>`;
+        //   return card;
+        // });
+
+        //searchResult.innerHTML = searchData.join("");
       })
-      .catch((err) => {
+      .catch(function(err) {
         console.log(err);
       });
   }
@@ -318,9 +356,18 @@ fetchImage(nivlUrl);
 window.addEventListener("DOMContentLoaded", (event) => {
   var searchImageBtn = document.getElementById("search-image");
   searchImageBtn.addEventListener("click", searchImagebyDate);
+  searchImageBtn.addEventListener("keypress", function (event) {
+    if (event.keyCode === 13) {
+      searchImagebyDate(event);
+    }
+  });
 
   var searchImgByDateBtn = document.getElementById("searchImg-byRange");
   searchImgByDateBtn.addEventListener("click", searchImageByRange);
-
+  searchImgByDateBtn.addEventListener("keypress", function (event) {
+    if (event.keyCode === 13) {
+      searchImageByRange(event);
+    }
+  });
   init();
 });
