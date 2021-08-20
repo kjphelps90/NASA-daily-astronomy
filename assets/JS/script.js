@@ -21,6 +21,7 @@ var nivlUrl =
   "&media_type=image&page=1&year_start=2018&year_end=2021";
 console.log(nivlUrl);
 var searchLibraryForm = document.getElementById("vid-img-form");
+var searchLibBtnEl = document.getElementById("search-imgLibrary");
 
 //--------Functions for NASA image of the Day---------
 //Display NASA image of the day
@@ -296,8 +297,7 @@ function fetchImage(nivlUrl) {
     });
 }
 
-var searchLibBtnEl = document.getElementById("search-imgLibrary");
-searchLibBtnEl.addEventListener("click", function (event) {
+function searchImageDatabase(event) {
   event.preventDefault();
   var searchLibInput = document.getElementById("vid-img-search");
   nivlSearchTerm = searchLibInput.value;
@@ -306,7 +306,10 @@ searchLibBtnEl.addEventListener("click", function (event) {
     nivlSearchTerm +
     "&media_type=image&page=1&year_start=2018&year_end=2021";
   fetchImage(searchCall);
-});
+}
+
+searchLibraryForm.addEventListener("submit", searchImageDatabase);
+searchLibBtnEl.addEventListener("click", searchImageDatabase);
 
 fetchImage(nivlUrl);
 
