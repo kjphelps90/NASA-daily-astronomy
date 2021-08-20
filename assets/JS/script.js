@@ -36,7 +36,7 @@ function displayPicture(data) {
 
   let pictureDate = document.querySelector(".date-taken");
   pictureDate.textContent =
-    "Date of Picture: " + moment(data.date).format("MM/DD/YYYY");
+    "Date of Picture: " + moment(data.date).format("MMMM Do, YYYY");
 
   let podContent = document.querySelector(".content");
   podContent.textContent = data.explanation;
@@ -114,7 +114,7 @@ function searchImageByRange() {
         let searchData = data.map((d) => {
           let elm = `<img src="${d.url}" class="image" alt="${
             d.title
-          }">${moment(d.date).format("MMM Do, YYYY")} <strong>${
+          }">${moment(d.date).format("MMMM Do, YYYY")} <strong>${
             d.title
           }</strong>`;
           let card = `<div class="result-item" onclick="displayPictureItem('${d.date}')">${elm}</div>`;
@@ -275,7 +275,7 @@ function createRandomImg(data) {
   var dateTimeStamp = data.collection.items[randItem].data[0].date_created;
   var imgDateTaken = document.getElementById("img-date");
   imgDateTaken.textContent =
-    "Date of Picture: " + moment(dateTimeStamp).format("MM/DD/YYYY");
+    "Date of Picture: " + moment(dateTimeStamp).format("MMMM Do, YYYY");
   var imgTitle = document.getElementById("img-title");
   imgTitle.textContent = imgAltText;
 }
