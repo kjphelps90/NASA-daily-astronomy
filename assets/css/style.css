@@ -71,17 +71,24 @@ header .brand {
   font-weight: bold;
 }
 
+.date {
+  font-size: 1.5rem;
+}
 .container {
   margin: 0 auto;
   padding-left: 10px;
   width: 80%;
 }
 
+/*NASA picture of the day styling*/
+
+
 .main-content {
   display: flex;
   flex-direction: row;
 }
 
+/*Image styling*/
 #gallery {
   height: 300px;
   width: 100%;
@@ -117,6 +124,20 @@ header .brand {
   font-size: 1.4rem;
 }
 
+/* Search image style*/
+.search-container {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 1%;
+} 
+
+.search-container p {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 .findImage {
   display: block;
   padding: 10px;
@@ -132,6 +153,30 @@ header .brand {
   font-size: 2rem;
 }
 
+/*NASA image search results*/
+#searchResult {
+  height: 400px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  padding: 8px;
+}
+
+#searchResult img {
+  width: 50px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+#searchResult .result-item {
+  margin: 3px 0;
+  padding: 5px;
+  border: 1px solid var(--light);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
+/*Near Earth Object(NEO) data styles*/
 #neo-data {
   margin: 20px 0 30px 10px;
   width: 100%;
@@ -175,30 +220,7 @@ td {
   font-size: 1.6rem;
 }
 
-/**
-* APOD Search Result
-*/
-#searchResult {
-  height: 400px;
-  overflow-y: auto;
-  word-wrap: break-word;
-  padding: 8px;
-}
-
-#searchResult img {
-  width: 50px;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-#searchResult .result-item {
-  margin: 3px 0;
-  padding: 5px;
-  border: 1px solid var(--light);
-  cursor: pointer;
-  font-size: 15px;
-}
-
+/*NASA Image library styles*/
 .library-img-container {
   display: flex;
   justify-content: center;
@@ -213,4 +235,9 @@ td {
 .description-container .img-desc {
   text-align: justify;
   font-size: 1.4rem;
+}
+
+#vid-img-search {
+  width: 250;
+  height: 20px;
 }
