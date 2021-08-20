@@ -220,7 +220,8 @@ function callNearEarthApi(nearEarthObjectsCall, date) {
 }
 
 //NEO Event Listener
-neoForm.addEventListener("submit", function (event) {
+var neoSearchEl = document.getElementById("neo-search");
+neoSearchEl.addEventListener("click", function (event) {
   event.preventDefault();
   var newNeoInputDate = neoDate.value;
   console.log(newNeoInputDate);
@@ -295,7 +296,8 @@ function fetchImage(nivlUrl) {
     });
 }
 
-searchLibraryForm.addEventListener("submit", function (event) {
+var searchLibBtnEl = document.getElementById("search-imgLibrary");
+searchLibBtnEl.addEventListener("click", function (event) {
   event.preventDefault();
   var searchLibInput = document.getElementById("vid-img-search");
   nivlSearchTerm = searchLibInput.value;
